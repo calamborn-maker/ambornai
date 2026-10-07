@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Amborn AI">
+<meta property="og:description" content="AI tools for Marin fitness studios. Tell me where your time goes. In 24 hours you'll have a plan.">
+<meta property="og:type" content="website">
+<title>Amborn AI</title>
+<meta name="description" content="AI tools for Marin fitness studios. Tell me where your time goes, and in 24 hours you get a one-page plan of what I'd build and what it costs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+:root {
+  --night: #11152B;
+  --night-muted: #9097B5;
+  --night-rule: #2A3159;
+  --day: #EDEFF4;
+  --paper: #FFFFFF;
+  --ink: #11152B;
+  --muted: #5A6078;
+  --rule: #D3D7E2;
+  --lamp: #FFB23F;
+  --lamp-deep: #B86E0A;
+  --font-clock: "Big Shoulders Display", "Oswald", "Arial Narrow", Impact, sans-serif;
+  --font-body: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--day); color: var(--ink); font-family: var(--font-body); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--lamp); outline-offset: 3px; border-radius: 4px; }
+p, h1, h2, h3, ul { margin: 0; }
+h1, h2, h3 { text-wrap: balance; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-inline: 24px; }
+.clock { font-family: var(--font-clock); font-weight: 800; line-height: .82; font-variant-numeric: tabular-nums; }
+.clock small { font-size: .36em; font-weight: 700; letter-spacing: .03em; margin-left: .08em; }
+
+.name-slot { display: inline-block; color: #F1F2F8; font-family: var(--font-clock); font-weight: 800; font-size: 1.25rem; letter-spacing: .06em; line-height: 1.2; text-transform: uppercase; }
+.btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 700; padding: 14px 24px; border-radius: 6px; background: var(--lamp); color: var(--night); transition: transform .15s ease, box-shadow .15s ease; }
+.btn:hover { transform: translateY(-1px); box-shadow: 0 8px 24px -10px rgba(255,178,63,.7); }
+
+.night { background: var(--night); color: #F1F2F8; position: relative; overflow: hidden; }
+.night::before { content: ""; position: absolute; width: 720px; height: 720px; left: -220px; top: -120px; background: radial-gradient(closest-side, rgba(255,178,63,.14), rgba(255,178,63,0)); pointer-events: none; }
+nav { position: relative; padding-block: 22px; }
+nav .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+nav a { color: var(--night-muted); font-weight: 600; text-decoration: none; }
+nav a:hover { color: #fff; }
+
+.hero { position: relative; padding-block: 72px 112px; }
+.hero-copy { max-width: 760px; display: grid; gap: 24px; justify-items: start; min-width: 0; }
+.hero h1 { font-size: clamp(2.4rem, 5.6vw, 4.2rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; }
+.hero h1 span { color: var(--lamp); }
+.hero p { color: var(--night-muted); font-size: 1.12rem; max-width: 30em; }
+.fine { font-size: .9rem; color: var(--night-muted); }
+
+.how { padding-block: 96px; }
+.how .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px; align-items: start; }
+.steps { display: grid; border-top: 2px solid var(--ink); }
+.step { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 20px; padding: 26px 0; border-bottom: 1px solid var(--rule); }
+.step .clock { font-size: 3.4rem; }
+.step .clock small { color: var(--muted); }
+.step:last-child .clock { color: var(--lamp-deep); }
+.step h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 6px; }
+.step p { color: var(--muted); }
+.aside { margin-top: 28px; color: var(--muted); }
+
+.plan { background: var(--paper); border-radius: 6px; padding: 32px 30px; box-shadow: 0 1px 0 var(--rule), 0 24px 48px -32px rgba(17,21,43,.45); transform: rotate(1deg); display: grid; gap: 22px; min-width: 0; }
+.plan-head { display: flex; justify-content: space-between; align-items: start; gap: 12px; border-bottom: 2px solid var(--ink); padding-bottom: 14px; }
+.plan-head b { display: block; font-size: 1.1rem; }
+.plan-head span { font-size: .85rem; color: var(--muted); }
+.stamp { font-family: var(--font-clock); font-weight: 800; font-size: .95rem; letter-spacing: .1em; color: var(--lamp-deep); border: 2px solid var(--lamp-deep); border-radius: 4px; padding: 2px 8px; transform: rotate(-4deg); white-space: nowrap; }
+.plan h4 { margin: 0 0 8px; font-size: .74rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.plan ul { list-style: none; padding: 0; display: grid; gap: 6px; font-size: .97rem; }
+.quotes li { font-style: italic; }
+.builds li { display: flex; justify-content: space-between; gap: 16px; }
+.builds li span:last-child { color: var(--muted); text-align: right; }
+.price { display: inline-block; width: 64px; height: .8em; border-radius: 3px; background: repeating-linear-gradient(90deg, var(--rule) 0 6px, transparent 6px 9px); align-self: center; flex: none; }
+
+.close { position: relative; padding-block: 88px 40px; }
+.close .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px; align-items: end; }
+.close-left { display: grid; gap: 20px; }
+.bio { color: var(--night-muted); max-width: 30em; }
+.bio b { color: #F1F2F8; font-weight: 600; }
+.close-cta { display: grid; gap: 4px; justify-items: start; }
+.contact-label { font-size: .74rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--night-muted); margin-top: 14px; }
+.contact-label:first-child { margin-top: 0; }
+.contact { font-size: clamp(1.3rem, 2.4vw, 1.7rem); font-weight: 600; color: #F1F2F8; text-decoration: none; border-bottom: 2px solid var(--lamp); line-height: 1.3; user-select: all; overflow-wrap: anywhere; }
+.contact:hover { color: var(--lamp); }
+footer { position: relative; padding-block: 64px 32px; }
+footer .wrap { display: flex; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; font-size: .85rem; color: var(--night-muted); border-top: 1px solid var(--night-rule); padding-top: 24px; }
+
+@media (max-width: 860px) {
+  .how .wrap, .close .wrap { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .hero { padding-block: 24px 72px; }
+  .step { grid-template-columns: 96px minmax(0, 1fr); }
+  .step .clock { font-size: 2.8rem; }
+  .plan { transform: none; padding: 26px 22px; }
+}
+@media (max-width: 480px) {
+  .wrap { padding-inline: 16px; }
+}
+@media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
+</style>
+</head><body>
+
+<div class="night">
+  <nav>
+    <div class="wrap">
+      <span class="name-slot">Amborn AI</span>
+      <a href="#book">Contact</a>
+    </div>
+  </nav>
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <h1>Tell me where your time goes. <span>In 24 hours you'll have a plan.</span></h1>
+        <p>I set up AI tools for fitness studios. You walk me through your week, and the next day I send you one page with what I'd build to take work off your plate and what it costs.</p>
+        <a class="btn" href="#book">Get in touch <span aria-hidden="true">→</span></a>
+        <span class="fine">Free, at your studio or over the phone.</span>
+      </div>
+    </div>
+  </header>
+</div>
+
+<section class="how">
+  <div class="wrap">
+    <div>
+      <div class="steps">
+        <div class="step">
+          <div class="clock">30<small>MIN</small></div>
+          <div>
+            <h3>You walk me through your week</h3>
+            <p>What tasks take longer than they should? What areas do you struggle to keep up with? Together, we find the most frustrating parts of your job, whether that be customer management and retention, content creation, administration and policy, or something else entirely.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="clock">24<small>HRS</small></div>
+          <div>
+            <h3>You get a one-page plan</h3>
+            <p>A plan of attack for each issue, specific to your business. A description of exactly what tools I would provide, with pricing and setup time specifics included.</p>
+          </div>
+        </div>
+      </div>
+      <p class="aside">If there's nothing worth building, the plan will say that too.</p>
+    </div>
+
+    <article class="plan" aria-label="Sample one-page plan">
+      <div class="plan-head">
+        <div><b>Plan for Your Studio</b><span>Sent the day after our call</span></div>
+        <span class="stamp">SAMPLE</span>
+      </div>
+      <div>
+        <h4>What I heard</h4>
+        <ul class="quotes">
+          <li>"I lose every Sunday night writing my newsletter."</li>
+          <li>"People buy the intro pack and disappear."</li>
+          <li>"I answer the same emails and DMs every night."</li>
+        </ul>
+      </div>
+      <div>
+        <h4>What I'd build</h4>
+        <ul class="builds">
+          <li><span>Studio profile</span><span>so every draft sounds like you</span></li>
+          <li><span>Member emails</span><span>newsletter and intro follow-ups</span></li>
+          <li><span>Inquiry replies</span><span>drafts for DMs and email</span></li>
+        </ul>
+      </div>
+      <div>
+        <h4>What it costs</h4>
+        <ul class="builds">
+          <li><span>Full suite, one flat price</span><span class="price" aria-label="price"></span></li>
+          <li><span>Custom builds, quoted up front</span><span class="price" aria-label="price"></span></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<div class="night" id="book">
+  <section class="close">
+    <div class="wrap">
+      <div class="close-left">
+        <p class="bio"><b>I'm Cal Amborn.</b> I pitched D1 baseball at the University of San Francisco, where I earned a B.S. in Kinesiology and an M.S. in Entrepreneurship &amp; Innovation. I'm also a certified strength and conditioning coach (CSCS). Before this, I worked in venture capital and used AI tools every day. Now I set those tools up for fitness studios.</p>
+      </div>
+      <div class="close-cta">
+        <span class="contact-label">Email</span>
+        <a class="contact" href="mailto:calramborn@gmail.com">calramborn@gmail.com</a>
+        <span class="contact-label">Phone or text</span>
+        <a class="contact" href="tel:+14153428297">(415) 342-8297</a>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="wrap">
+      <span>Amborn AI · Marin County, CA</span>
+      <span>Independent consultant. Not affiliated with Anthropic, the maker of Claude.</span>
+    </div>
+  </footer>
+</div>
+</body></html>
